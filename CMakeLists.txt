@@ -1,7 +1,15 @@
 cmake_minimum_required(VERSION 3.16)
-set(CMAKE_CXX_STANDARD 17)
-
 project(Maid DESCRIPTION "Maid VM agent (https://github.com/kotx/maid)" VERSION 0.1.0)
+
+set(CMAKE_CXX_STANDARD 20)
+
+# Prefer the latest version of deps
+SET(CMAKE_FIND_PACKAGE_SORT_ORDER NATURAL)
+SET(CMAKE_FIND_PACKAGE_SORT_DIRECTION DEC)
+
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
+  CACHE STRING "Vcpkg toolchain file")
+
 
 add_subdirectory(protos)
 

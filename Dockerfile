@@ -11,9 +11,8 @@ RUN apk --no-cache add cmake build-base \
 WORKDIR /usr/src/maid
 COPY . /usr/src/maid
 
-RUN cmake . \
-    && mkdir bin && cd bin \
-    && cmake --build .. && cmake --install ..
+RUN cmake -B bin -DCMAKE_TOOLCHAIN_FILE= -S . \
+    && cmake --build bin && cmake --install bin
 
 FROM base AS final
 WORKDIR /opt/maid
