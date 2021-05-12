@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package remote;
+
+import "google/protobuf/empty.proto";
+
+service Remote {
+    rpc Control (stream ControlRequest) returns (google.protobuf.Empty);
+}
+
+message MouseControl {
+    // Required.
+    int32 x = 1;
+    // Required.
+    int32 y = 2;
+
+    Button click = 3;
+    // Required if click is present.
+    bool buttonDown = 4;
+
+    enum Button {
+        NONE = 0;
+        LEFT = 1;
+        MIDDLE = 2;
+        RIGHT = 3;
+    }
+}
+
+message ControlRequest {
+    // Required.
+    oneof control {
+        MouseControl mouse = 1;
+
+        // Length must be 1.
+        string key = 2;
+    }
+
+    // Modifier keys: ctrl = 1, shift = 2
+    int32 mod_keys = 3;
+
+    ScrollWheel scroll = 4;
+
+    enum ScrollWheel {
+        NONE = 0;
+        Up = 1;
+        Down = 2;
+    }
+}
