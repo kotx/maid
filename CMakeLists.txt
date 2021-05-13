@@ -10,8 +10,7 @@ SET(CMAKE_FIND_PACKAGE_SORT_DIRECTION DEC)
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
   CACHE STRING "Vcpkg toolchain file")
 
-
-add_subdirectory(protos)
+add_subdirectory(proto)
 
 add_executable(main
     src/main.cpp
@@ -20,5 +19,6 @@ add_executable(main
 
 target_link_libraries(main PRIVATE maid_proto)
 
-install(FILES README.md LICENSE DESTINATION /opt/maid)
-install(TARGETS main DESTINATION /opt/maid)
+set(MAID_INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin CACHE STRING "Maid install directory")
+install(FILES README.md LICENSE DESTINATION ${MAID_INSTALL_DIR})
+install(TARGETS main DESTINATION ${MAID_INSTALL_DIR})

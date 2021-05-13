@@ -11,12 +11,12 @@ RUN apk --no-cache add cmake build-base \
 WORKDIR /usr/src/maid
 COPY . /usr/src/maid
 
-RUN cmake -B bin -DCMAKE_TOOLCHAIN_FILE= -S . \
-    && cmake --build bin && cmake --install bin
+RUN cmake -B build -DCMAKE_TOOLCHAIN_FILE= . \
+    && cmake --build build && cmake --install build
 
 FROM base AS final
 WORKDIR /opt/maid
-COPY --from=build /opt/maid .
+COPY --from=build /usr/src/maid/bin .
 
 # Runtime deps
 RUN apk --no-cache add grpc

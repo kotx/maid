@@ -2,6 +2,7 @@
 .vscode
 
 vcpkg
+build/
 bin/
 
 CMakeLists.txt.user
