@@ -1,7 +1,6 @@
-#include <remote.pb.h>
-#include <remote.grpc.pb.h>
+#include "include/remote.h"
 
-class RemoteServiceImpl final : public Remote::Service
+Status RemoteService::Control(ServerContext *context, ServerReader<maid::ControlRequest> *reader, Empty *response)
 {
-public:
+    return Status::OK;
 };
