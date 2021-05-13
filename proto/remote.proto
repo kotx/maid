@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-package remote;
-
 import "google/protobuf/empty.proto";
 
 service Remote {

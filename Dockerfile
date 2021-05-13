@@ -9,9 +9,12 @@ RUN apk --no-cache add cmake build-base \
     grpc grpc-dev protobuf-dev c-ares-dev
 
 WORKDIR /usr/src/maid
-COPY . /usr/src/maid
+COPY . .
 
-RUN cmake -B build -DCMAKE_TOOLCHAIN_FILE= . \
+# Workaround for "protoc-gen-grpc not found"
+RUN ln -s $(which grpc_cpp_plugin) /usr/bin/protoc-gen-grpc
+
+RUN cmake -B build . \
     && cmake --build build && cmake --install build
 
 FROM base AS final
